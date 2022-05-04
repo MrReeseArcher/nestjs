@@ -19,27 +19,8 @@ export class UsersService {
         return user;
     }
 
-    async generateUsers() {
-        // for () {
-        //     let user = new CreateUserDto(
-        //         this.generateRandomString(10),
-        //
-        //     );
-        //     this.userRepository.create(user);
-        // }
-    }
-
     async getAll() {
         return this.userRepository.findAll({include: {all: true}});
     }
 
-    generateRandomString(myLength) {
-        const chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
-        const randomArray = Array.from(
-            { length: myLength },
-            (v, k) => chars[Math.floor(Math.random() * chars.length)]
-        );
-
-        return randomArray.join("");
-    };
 }

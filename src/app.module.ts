@@ -7,6 +7,7 @@ import { RoleModule } from './role/role.module';
 import {Role} from "./role/roles.model";
 import {UserRoles} from "./role/user.roles.model";
 import {DefaultModule} from "./default/default.module";
+import {ThrottlerModule} from "@nestjs/throttler";
 
 @Module({
     controllers: [],
@@ -25,6 +26,18 @@ import {DefaultModule} from "./default/default.module";
             models: [User, Role, UserRoles],
             autoLoadModels: true,
         }),
+        ThrottlerModule.forRoot({
+            ttl: 60,
+            limit: 1500,
+        }),
+        // ThrottlerModule.forRootAsync({
+        //     imports: [ConfigModule],
+        //     inject: [ConfigService],
+        //     useFactory: (config: ConfigService) => ({
+        //         ttl: config.get('THROTTLE_TTL'),
+        //         limit: config.get('THROTTLE_LIMIT'),
+        //     }),
+        // }),
         UsersModule,
         RoleModule,
         DefaultModule,

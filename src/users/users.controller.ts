@@ -16,17 +16,10 @@ export class UsersController {
         return this.userService.create(userDto);
     }
 
-    @ApiOperation({summary: 'Создание пользователей'})
-    @ApiResponse({status: 200})
-    @Post('generate')
-    generateUsers() {
-        return this.userService.generateUsers();
-    }
-
     @ApiOperation({summary: 'Список пользователей'})
     @ApiResponse({status: 200, type: [User]})
     @Get()
-    getAll() {
-        return this.userService.getAll();
+    async getAll() {
+        return await this.userService.getAll();
     }
 }
